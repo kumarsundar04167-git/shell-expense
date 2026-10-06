@@ -16,13 +16,13 @@ N="\e[0m"
 MYSQL_HOST=mysql.devopsonline.online
 
 
-if [ $userid -ne 0 ]: then
+if [ $userid -ne 0 ]; then
    echo -e " $TIMESTAMP $R please run this script as a root user $N"
    exit 1
 fi
 
 validate(){
-    if [ $1 -ne 0 ]: then
+    if [ $1 -ne 0 ]; then
        echo -e " $TIMESTAMP $R [ERROR] $N task of $2 is ....... $R failed $N "  | tee -a LOGS_FILE
        exit 1
     else
@@ -41,16 +41,16 @@ mkdir -p /app
 validate $? "creating app directory"
 
 id expense
-if [ $? eq 0 ]: then
-   echo -e " $TIMESTAMP $Y [INFO] $N alreary created expense user ...... $Y skipping $N " | tee -a LOGS_FILE
+if [ $? eq 0 ]; then
+   echo -e " $TIMESTAMP $Y [INFO] $N alreary created expense user ...... $Y skipping $N " | tee -a $LOGS_FILE
    exit 1
 else
-   echo "creating expense user" | tee -a LOGS_FILE
+   echo "creating expense user" | tee -a $LOGS_FILE
    useradd --system --home /app --shell /sbin/nologin --comment "expense system user" expense  &>>$LOGS_FILE
    validate $? "creating system user"
 fi
 
-curl -o /tmp/backend.tar.gz https://raw.githubusercontent.com/daws-90s/expense-documentation/refs/heads/main/artifacts/expense-backend-v3.tar.gz
+curl -o /tmp/backend.tar.gz https://raw.githubusercontent.com/daws-90s/expense-documentation/refs/heads/main/artifacts/expense-backend-v3.tar.gz  &>>$LOGS_FILE
 validate $? "downloding the code into /tmp/backend.tar.gz"
 
 cd /app
@@ -65,10 +65,10 @@ cp $SCRIPT_DIR/backend.service /etc/systemd/system/backend.service &>>$LOGS_FILE
 validate $? "copying backend.service file to/etc/systemd/system/backend.service "
 
 dnf list installed mysql  &>>$LOGS_FILE
-if [ $? eq 0 ]: then
-   echo -e " $TIMESTAMP $Y [INFO] $N installing mysql-server already installed ........ $Y skipping $N " | tee -a LOGS_FILE
+if [ $? eq 0 ]; then
+   echo -e " $TIMESTAMP $Y [INFO] $N installing mysql-server already installed ........ $Y skipping $N " | tee -a $LOGS_FILE
 else
-   echo "installing mysql-server" | tee -a LOGS_FILE
+   echo "installing mysql-server" | tee -a $LOGS_FILE
    dnf install mysql -y &>>$LOGS_FILE
    validate $? "installing mysql-server"
 fi

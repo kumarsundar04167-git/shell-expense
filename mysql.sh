@@ -15,23 +15,23 @@ N="\e[0m"
 pass=ExpenseApp@1
 
 
-if [ $userid -ne 0 ]: then
-   echo -e " $TIMESTAMP $R please run this script as a root user $N"
+if [ $userid -ne 0 ]; then
+   echo -e " $TIMESTAMP $R please run this script as a root user $N" | tee -a $LOGS_FILE
    exit 1
 fi
 
 validate(){
-    if [ $1 -ne 0 ]: then
-       echo -e " $TIMESTAMP $R [ERROR] $N task of $2 is ....... $R failed $N "  | tee -a LOGS_FILE
+    if [ $1 -ne 0 ]; then
+       echo -e " $TIMESTAMP $R [ERROR] $N task of $2 is ....... $R failed $N "  | tee -a $LOGS_FILE
        exit 1
     else
-       echo -e " $TIMESTAMP $Y [INFO] $N task of $2 is ....... $G success $N "   | tee -a LOGS_FILE
+       echo -e " $TIMESTAMP $Y [INFO] $N task of $2 is ....... $G success $N "   | tee -a $LOGS_FILE
     fi
 }
 
 dnf list installed mysql-server  &>>$LOGS_FILE
-if [ $? eq 0 ]: then
-   echo -e " $TIMESTAMP $Y [INFO] $N installing mysql-server already installed ........ $Y skipping $N " | tee -a LOGS_FILE
+if [ $? eq 0 ]; then
+   echo -e " $TIMESTAMP $Y [INFO] $N installing mysql-server already installed ........ $Y skipping $N " | tee -a $LOGS_FILE
 else
    echo "installing mysql-server"
    dnf install mysql-server -y &>>$LOGS_FILE

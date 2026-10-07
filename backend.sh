@@ -1,6 +1,6 @@
 #!/bin/bash
 userid=$(id -u)
-LOGS_FOLDER="/var/log/expense/"
+LOGS_FOLDER="/var/log/expense"
 sudo mkdir -p "$LOGS_FOLDER"
 sudo chown -R ec2-user:ec2-user /var/log/expense
 sudo chmod -R 755 /var/log/expense
@@ -24,10 +24,10 @@ fi
 
 validate(){
     if [ $1 -ne 0 ]; then
-       echo -e " $TIMESTAMP $R [ERROR] $N task of $2 is ....... $R failed $N "  | tee -a LOGS_FILE
+       echo -e " $TIMESTAMP $R [ERROR] $N task of $2 is ....... $R failed $N "  | tee -a $LOGS_FILE
        exit 1
     else
-       echo -e " $TIMESTAMP $Y [INFO] $N task of $2 is ....... $G success $N "   | tee -a LOGS_FILE
+       echo -e " $TIMESTAMP $Y [INFO] $N task of $2 is ....... $G success $N "   | tee -a $LOGS_FILE
     fi
 }
 

@@ -66,7 +66,7 @@ cp $SCRIPT_DIR/backend.service /etc/systemd/system/backend.service &>>$LOGS_FILE
 validate $? "copying backend.service file to/etc/systemd/system/backend.service "
 
 dnf list installed mysql  &>>$LOGS_FILE
-if [ $? eq 0 ]; then
+if [ $? -eq 0 ]; then
    echo -e " $TIMESTAMP $Y [INFO] $N installing mysql-server already installed ........ $Y skipping $N " | tee -a $LOGS_FILE
 else
    echo "installing mysql-server" | tee -a $LOGS_FILE

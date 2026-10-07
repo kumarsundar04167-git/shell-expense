@@ -41,7 +41,7 @@ mkdir -p /app
 validate $? "creating app directory"
 
 id expense
-if [ $? eq 0 ]; then
+if [ $? -eq 0 ]; then
    echo -e " $TIMESTAMP $Y [INFO] $N alreary created expense user ...... $Y skipping $N " | tee -a $LOGS_FILE
    exit 1
 else

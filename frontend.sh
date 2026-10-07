@@ -1,7 +1,7 @@
 #!/bin/bash
 userid=$(id -u)
 LOGS_FOLDER="var/log/expense"
-sudo mkdir -p $LOGS_FOLDER
+sudo mkdir -p "$LOGS_FOLDER"
 sudo chown -R ec2-user:ec2-user var/log/expense
 sudo chmod -R 755 var/log/expense
 SCRIPT_NAME=$(basename "$0" .sh)

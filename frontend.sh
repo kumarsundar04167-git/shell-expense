@@ -4,7 +4,8 @@ LOGS_FOLDER="var/log/expense"
 sudo mkdir -p $LOGS_FOLDER
 sudo chown -R ec2-user:ec2-user var/log/expense
 sudo chmod -R 755 var/log/expense
-LOGS_FILE=$LOGS_FOLDER/$0.logs
+SCRIPT_NAME=$(basename "$0" .sh)
+LOGS_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 SCRIPT_DIR=$PWD
 
 TIMESTAMP=$(date +%H:%M:%S)

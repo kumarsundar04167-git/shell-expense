@@ -1,10 +1,11 @@
 #!/bin/bash
 userid=$(id -u)
-LOGS_FOLDER=var/log/expense/lb.log
-sudo mkdir -p $LOGS_FOLDER
+LOGS_FOLDER="/var/log/expense"
+sudo mkdir -p "$LOGS_FOLDER"
 sudo chown -R ec2-user:ec2-user var/log/expense
 sudo chmod -R 755 var/log/expense
-LOGS_FILE=$LOGS_FOLDER
+SCRIPT_NAME=$(basename "$0")
+LOGS_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 SCRIPT_DIR=$PWD
 
 TIMESTAMP=$(date +%H:%M:%S)

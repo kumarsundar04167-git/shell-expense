@@ -11,8 +11,8 @@ Y="\e[33m"
 N="\e[0m"
 
 if [ $# -lt 2 ]; then
-   echo " $Y minimum two parameters required ..... [INFO] $N"
-   echo "USAGE is: $Y $0 [create/delete] [instances1] [instance2].... $N "
+   echo -e " $Y minimum two parameters required ..... [INFO] $N"
+   echo -e "USAGE is: $Y $0 [create/delete] [instances1] [instance2].... $N "
    exit 1
 fi
 
@@ -20,8 +20,8 @@ ACTION=$1
 shift
 
 if [ "$ACTION" != "create" ] && [ "$ACTION" != "delete" ]; then
-   echo " $R [ERROR] first argument must be create or delete.....$N"
-   echo "USAGE is: $Y $0 [create/delete] [instances1] [instance2].... $N"
+   echo -e " $R [ERROR] first argument must be create or delete.....$N"
+   echo -e "USAGE is: $Y $0 [create/delete] [instances1] [instance2].... $N"
    exit 1
 fi
 

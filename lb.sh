@@ -31,7 +31,7 @@ validate(){
 }
 
 dnf list installed nginx  &>>$LOGS_FILE
-if [ $? eq 0 ]; then
+if [ $? -eq 0 ]; then
    echo -0e "$TIMESTAMP $Y [INFO] $N already installed ...... $Y skipping $N "  | tee -a $LOGS_FILE
 else
    echo -e "$TIMESTAMP $Y installing nginx $N "  | tee -a $LOGS_FILE

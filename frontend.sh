@@ -1,6 +1,6 @@
 #!/bin/bash
 userid=$(id -u)
-LOGS_FOLDER=var/log/expense
+LOGS_FOLDER="var/log/expense"
 sudo mkdir -p $LOGS_FOLDER
 sudo chown -R ec2-user:ec2-user var/log/expense
 sudo chmod -R 755 var/log/expense
@@ -31,8 +31,8 @@ validate(){
 }
 
 dnf list installed nginx  &>>$LOGS_FILE
-if [ $? eq 0 ]; then
-   echo -0e "$TIMESTAMP $Y [INFO] $N already installed ...... $Y skipping $N " | tee -a $LOGS_FILE
+if [ $? -eq 0 ]; then
+   echo -e "$TIMESTAMP $Y [INFO] $N already installed ...... $Y skipping $N " | tee -a $LOGS_FILE
 else
    echo -e "$TIMESTAMP $Y installing nginx $N " | tee -a $LOGS_FILE
    dnf install nginx -y &>>$LOGS_FILE
